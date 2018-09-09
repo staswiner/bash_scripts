@@ -4,23 +4,29 @@ _script()
 {
   COMPREPLY=();
   local currentCompletionWord="${COMP_WORDS[COMP_CWORD]}";
+	local previousCompletionWord="${COMP_WORDS[COMP_CWORD-1]}"
+	if [[ $previousCompletionWord = "=" ]]
+	then
+		previousCompletionWord=${COMP_WORDS[COMP_CWORD-2]}	
+	fi
 	case "$currentCompletionWord" in
-		--project=*)
-			echo im here
-			COMPREPLY=($(compgen -W "--project={kafka,kafka-test}" -- "$currentCompletionWord"))
-			;;
-		--*)
-			COMPREPLY=($(compgen -W "--help --project={a,b} --master-ip= " -- "$currentCompletionWord"))
-			;;
-		-*)
-			COMPREPLY=($(compgen -W "-h --help --project={a,b,c} --master-ip=" -- "$currentCompletionWord"))
-			;;
 		*)
-			COMPREPLY=($(compgen -W "-h --help --project={a,b,c,d} --master-ip=" -- "$currentCompletionWord"))
+			COMPREPLY=($(compgen -S\= -W "--project --master-ip" -- $currentCompletionWord))
+			COMPREPLY+=($(compgen -W "-h --help" -- "$currentCompletionWord"))
+
+			case $previousCompletionWord in
+			--project)
+				COMPREPLY=($(compgen -W "kafka kafka-test" -- "${currentCompletionWord#=}"))
+				;;
+			--master-ip)
+				COMPREPLY=($(compgen -W "zose-master01 zose-master02 zose-master03" -- "${currentCompletionWord#=}"))
+				;;
+			esac
+
 			;;
 	esac
 
 	return 0
 }
 
-complete -p -F _script -o filenames ./script.sh
+complete -o nospace -F _script ./script.sh
