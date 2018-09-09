@@ -3,6 +3,7 @@
 _script()
 {
   COMPREPLY=();
+	#projects=$(./oc) 2>/dev/null;
   local currentCompletionWord="${COMP_WORDS[COMP_CWORD]}";
 	local previousCompletionWord="${COMP_WORDS[COMP_CWORD-1]}"
 	if [[ $previousCompletionWord = "=" ]]
@@ -16,7 +17,7 @@ _script()
 
 			case $previousCompletionWord in
 			--project)
-				COMPREPLY=($(compgen -W "kafka kafka-test" -- "${currentCompletionWord#=}"))
+				COMPREPLY=($(compgen -W "$projects" -- "${currentCompletionWord#=}"))
 				;;
 			--master-ip)
 				COMPREPLY=($(compgen -W "zose-master01 zose-master02 zose-master03" -- "${currentCompletionWord#=}"))
