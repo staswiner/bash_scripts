@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# usage: source setLoggerLevel [level]
+
+set_completion() {
+	echo hi
+}
+
+write_log_level() {
+	echo $1 > loggerLevel;
+	echo Logger level set to $1
+}
+
+parse_args() {
+	case $1 in
+		debug) write_log_level 3 ;;
+		warn) write_log_level 2 ;;
+		info|error) write_log_level 1 ;;
+		none|silent) write_log_level 0 ;;
+		*) echo "invalid debug level. valid options are [debug, warn, info|error, none|silent]"
+	esac
+}
+
+main() {
+	parse_args $@
+}
+
+main $@

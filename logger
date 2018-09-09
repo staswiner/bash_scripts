@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Logger levels, set global variable LOGGER_LEVEL={0,1,2,3}
+# Silent 0
+# Info, Error 1
+# Warn 2
+# Debug 3
+
+logger.base() {
+	LOGGER_LEVEL=`./getLoggerLevel`
+	logger.setDefaultLevel $LOGGER_LEVEL
+	function_logger_level=$1; shift;
+
+
+	if [[ $LOGGER_LEVEL -lt $function_logger_level ]]
+	then
+		return 1
+	fi
+
+	color=$1; shift;
+	log_type=$1; shift;
+	white_color='\e[97m'
+	echo -e "$color[$log_type]:$white_color $@"
+}
+
+logger.setDefaultLevel() {
+	LOGGER_LEVEL=$1
+	if [[ -z $LOGGER_LEVEL ]]
+	then
+		./setLoggerLevel debug
+	fi
+}
+
+logger.error() {
+	red='\e[31m'
+	function_logger_level=1
+	logger.base $function_logger_level $red 'Error' $@
+}
+
+logger.info() {
+	green='\e[32m'
+	function_logger_level=1
+	logger.base $function_logger_level $green 'Info' $@
+}
+
+logger.warn() {
+	yellow='\e[93m'
+	function_logger_level=2
+	logger.base $function_logger_level $yellow 'Warn' $@
+}
+
+logger.debug() {
+	blue='\e[34m'
+	function_logger_level=3
+	logger.base $function_logger_level $blue 'Debug' $@
+}
