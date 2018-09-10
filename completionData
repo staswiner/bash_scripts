@@ -4,3 +4,4 @@ _add_multi_option "--project" $projects
 master_ips="zose-master01 zose-master02"
 _add_multi_option "--master-ip" $master_ips
 
+_add_option "-h"
