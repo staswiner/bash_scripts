@@ -1,7 +1,9 @@
 projects="kafka kafka-test"
 _add_multi_option "--project" $projects
 
+_add_multi_option "--lama" "very much"
+
 master_ips="zose-master01 zose-master02"
 _add_multi_option "--master-ip" $master_ips
 
-_add_option "-h"
+#_add_option "-h"

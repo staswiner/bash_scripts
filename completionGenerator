@@ -22,6 +22,7 @@ _add_multi_option()
 		return 1;
 	fi
 	COMPREPLY+=($(compgen -W "$option" -- $current))
+	return 0
 }
 
 _parse_options_from_file()
@@ -33,7 +34,8 @@ _parse_options_from_file()
 _generate_file()
 {
 	completionDataFile=$1
-	completionFile=$2
+	scriptName=$2
+	completionFile=$3
 	cat << EOF > $completionFile
 #!/bin/bash
 `declare -f _add_option`
@@ -47,24 +49,27 @@ _compose_options()
 	`_parse_options_from_file $completionDataFile`
 }
 
-complete -F _compose_options ./script.sh
+complete -F _compose_options ./$scriptName
 EOF
 
 }
 
 usage() {
-	echo "usage $0: [completion_data_file] optional:[target_completion_file]"
+	echo "usage $0: [completion_data_file] [script_name] optional:[target_completion_file]"
 }
 
 main() {
-	if [ -z $1 ]; then
+	if [ -z $1 ] || [ -z $2 ]; then
 		usage
 		exit 1
 	fi
 	completionDataFile=$1
-	completionFile=${2:-completion.bash}
-
-	_generate_file $completionDataFile $completionFile
+	scriptName=$2
+	completionFile=${3:-completion.bash}
+	logger.info $completionDataFile
+	logger.info $scriptName
+	logger.info $completionFile
+	_generate_file $completionDataFile $scriptName $completionFile
 }
 
 main $@
