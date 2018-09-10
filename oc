@@ -1,2 +1,2 @@
-echo "kafka"
-echo "kafka-test"
+#printf "kafka "
+#printf "kafka-test"

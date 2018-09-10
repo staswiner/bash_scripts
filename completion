@@ -2,9 +2,9 @@
 
 _script()
 {
-  COMPREPLY=();
-	#projects=$(./oc) 2>/dev/null;
-  local currentCompletionWord="${COMP_WORDS[COMP_CWORD]}";
+	COMPREPLY=();
+	projects="kafka kafka-test"
+	local currentCompletionWord="${COMP_WORDS[COMP_CWORD]}";
 	local previousCompletionWord="${COMP_WORDS[COMP_CWORD-1]}"
 	if [[ $previousCompletionWord = "=" ]]
 	then

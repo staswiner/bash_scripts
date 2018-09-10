@@ -37,6 +37,7 @@ main()
 {
 	logger.warn Hello World!
 	logger.debug Hello World!
+
 	parse_args $@
 }
 
