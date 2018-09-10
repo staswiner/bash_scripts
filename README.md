@@ -22,6 +22,22 @@ If the level is higher than the logger, the logger will apear.
 
 
 # Completion Generator
+
+completionGenerator generates a file based on rules provided.
+the output is a script, with the default name of 'completion.bash'.
+to activate the completion:
+
+    source ./completion.bash
+#### recommendation
+put that line in your ~/.bashrc file
+
+## using completionGenerator
+    usage ./completionGenerator: [completion_data_file] [script_name] optional:[target_completion_file]
+        target_completion_file      default is 'completion.bash'
+
+#### example:
+    ./completionGenerator completion.data myScript.sh completion.out
+
 ## FILE DATA:
 
 ### _add_multi_option - option with values
