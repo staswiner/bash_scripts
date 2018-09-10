@@ -1,0 +1,30 @@
+#!/bin/bash
+_add_option () 
+{ 
+    local option=$1;
+    COMPREPLY+=($(compgen -S\= -W "$option" -- $currentCompletionWord))
+}
+
+_add_multi_option () 
+{ 
+    local option=$1;
+    shift;
+    local answers="$@";
+    local current="${COMP_WORDS[COMP_CWORD]}";
+    local previous="${COMP_WORDS[COMP_CWORD-1]}";
+    if [[ $previous = $option ]]; then
+        COMPREPLY=($(compgen -W "$answers" -- $current));
+        return 1;
+    fi;
+    COMPREPLY+=($(compgen -W "$option" -- $current));
+    return 0
+}
+
+_compose_options()
+{
+	COMPREPLY=();
+	local current="${COMP_WORDS[COMP_CWORD]}";
+
+}
+
+complete -F _compose_options ./script.sh
