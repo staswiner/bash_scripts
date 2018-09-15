@@ -1,0 +1,23 @@
+#!/bin/bash
+
+source ../Logger/logger
+
+logger="../Logger/logger"
+
+link()
+{
+	library=$1
+	local_copy="./$library"
+	path=$[$library]
+	if [ -z $local_copy ]; 
+	then
+		cp $path $local_copy
+	fi
+	source $local_copy 
+}
+
+update_local_copy()
+{
+	
+}
+
