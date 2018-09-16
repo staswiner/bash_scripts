@@ -8,3 +8,7 @@ vmap <up> <up>0
 map  0i#<esc>
 vmap  :norm i#<esc>
 " set list
+highlight Pmenu       ctermbg=LightGray
+highlight PmenuSel    ctermbg=Gray
+highlight PmenuSbar   ctermbg=Gray
+highlight PmenuThumb  ctermbg=Black
