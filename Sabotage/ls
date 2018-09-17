@@ -17,4 +17,4 @@ else
 	parameters=$partial_parameters
 fi
 
-echo ssh -tq root@rach -ACF $parameters $path
+ssh -tq root@rach -ACF $parameters $path
