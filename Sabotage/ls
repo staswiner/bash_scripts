@@ -1,0 +1,20 @@
+#!/bin/bash
+
+path=
+parameters=
+last_parameter=$BASH_ARGV
+length=$(($#-1))
+partial_parameters=${@:1:$length}
+
+if [[ $last_parameter == /* ]]; then
+	path=$last_parameter
+	parameters=$partial_parameters
+elif [[ $last_parameter == -* ]]; then
+	path=`pwd`
+	parameters=$@
+else
+	path=`pwd`/$last_parameter
+	parameters=$partial_parameters
+fi
+
+echo ssh -tq root@rach -ACF $parameters $path
