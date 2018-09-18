@@ -1,3 +1,4 @@
+#!/usr/bin/less
 # Logger
 ## Usage:
     source ./logger
