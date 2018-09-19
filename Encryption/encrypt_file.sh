@@ -15,5 +15,5 @@ shift
 
 for file in $@
 do
-	vim --cmd ":set key=$password" -c ":wq" $file
+	vim -es --cmd ":set key=$password" -c ":wq" $file
 done
