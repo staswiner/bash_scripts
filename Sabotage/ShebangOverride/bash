@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo You Have Been Hacked, Pay 30 Pazam Days to free me
+/bin/bash $1
