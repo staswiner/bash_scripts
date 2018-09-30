@@ -17,13 +17,13 @@ cmap w!! w !sudo tee > /dev/null %
 " mimic vscode selection
 " right
 	" ctrl
-nnoremap [1;5C w
+nnoremap [1;5C e
 	" shift-ctrl
-nnoremap [1;6C vw
+nnoremap [1;6C ve
 	" shift
 nnoremap [1;2C v<right>
 	" shift-ctrl
-vnoremap [1;6C w
+vnoremap [1;6C e
 	" shift
 vnoremap [1;2C <right>
 	" disable visual mode on movement
@@ -56,3 +56,19 @@ vnoremap [1;6B <down>
 	" shift
 nnoremap [1;2B v<down>
 nnoremap [1;6B v<down>
+
+
+" autocomplete ctrl-space
+inoremap <c-@> <c-p>
+
+" move lines
+	" up
+noremap [1;3B ddp
+	" down
+function Move_line_up()
+	if line('.') > 1
+		norm ddkP
+	endif
+endfunction
+
+noremap [1;3A :call Move_line_up()<cr> 
