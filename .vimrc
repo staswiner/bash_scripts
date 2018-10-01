@@ -5,14 +5,24 @@ set number
 set visualbell
 vmap <down> <down>$
 vmap <up> <up>0
-map  0i#<esc>
-vmap  :norm i#<esc>
+
 " set list
-highlight Pmenu 			ctermbg=LightGray
-highlight PmenuSel 		ctermbg=Gray
-highlight PmenuSbar		ctermbg=Gray
-highlight PmenuThumb	ctermbg=Black
+highlight Pmenu       ctermbg=LightGray
+highlight PmenuSel    ctermbg=Gray
+highlight PmenuSbar   ctermbg=Gray
+highlight PmenuThumb  ctermbg=Black
+
+" save as sudoer
 cmap w!! w !sudo tee > /dev/null %
+
+" enable omnicompletion
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
+" abbrevs
+iabbrev bash #!/bin/bash
+
+
 
 " mimic vscode selection
 " right
@@ -57,7 +67,6 @@ vnoremap [1;6B <down>
 nnoremap [1;2B v<down>
 nnoremap [1;6B v<down>
 
-
 " autocomplete ctrl-space
 inoremap <c-@> <c-p>
 
@@ -72,3 +81,12 @@ function Move_line_up()
 endfunction
 
 noremap [1;3A :call Move_line_up()<cr> 
+
+
+" search-replace
+inoremap  <esc>:%s@@@g<left><left>
+nnoremap  :%s@@@g<left><left>
+vnoremap  y:%s@"@@g<left><left> 
+
+" search-highlight
+nnoremap  :set hlsearch!<cr>#*
