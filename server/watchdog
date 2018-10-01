@@ -1,0 +1,36 @@
+#!/bin/bash
+
+eval homedir=~
+
+if [ -z $DATA ]; then
+	echo missing $DATA path, defaulting to $homedir/dat
+	DATA="$homedir/data"
+fi
+
+if [ ! -d "$DATA" ]; then
+	mkdir $DATA
+fi
+
+currentIPFile="$DATA/currentIP"
+if [ ! -f "$currentIPFile" ]; then
+	touch "$currentIPFile"
+fi
+
+test_ip()
+{
+	updatedIP=`./getExternalIp`
+	currentIP=`cat $DATA/currentIP`
+
+	if [[ "$updatedIP" != "$currentIP" ]]; then
+		echo "$updatedIP" > $currentIPFile
+	else
+		echo "same ip"
+	fi
+}
+
+
+while true
+do
+	test_ip
+	sleep 300
+done
