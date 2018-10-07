@@ -90,3 +90,6 @@ vnoremap  y:%s@"@@g<left><left>
 
 " search-highlight
 nnoremap  :set hlsearch!<cr>#*
+
+" json format
+com! FormatJSON	:%!python -m json.tool
