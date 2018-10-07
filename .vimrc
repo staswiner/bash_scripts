@@ -3,10 +3,12 @@ set tabstop=2
 syntax on
 set number
 set visualbell
+set paste
 vmap <down> <down>$
 vmap <up> <up>0
 
-" set list
+noremap  :set list!<cr>
+
 highlight Pmenu       ctermbg=LightGray
 highlight PmenuSel    ctermbg=Gray
 highlight PmenuSbar   ctermbg=Gray
@@ -22,7 +24,11 @@ set omnifunc=syntaxcomplete#Complete
 " abbrevs
 iabbrev bash #!/bin/bash
 
-
+" ctrl moving
+	" ctrl - right
+inoremap [1;5C <esc><right>ei
+	" ctrl - left
+inoremap [1;5D <esc>bi
 
 " mimic vscode selection
 " right
@@ -84,7 +90,7 @@ noremap [1;3A :call Move_line_up()<cr>
 
 
 " search-replace
-inoremap  <esc>:%s@@@g<left><left>
+inoremap  <esc>:%s@@@<left><left>
 nnoremap  :%s@@@g<left><left>
 vnoremap  y:%s@"@@g<left><left> 
 
@@ -93,3 +99,9 @@ nnoremap  :set hlsearch!<cr>#*
 
 " json format
 com! FormatJSON	:%!python -m json.tool
+
+" save program
+noremap  :w<cr>
+" Run program
+com! Run :! ./%
+noremap [15;5~ :Run<cr>

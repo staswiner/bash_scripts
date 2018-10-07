@@ -1,0 +1,14 @@
+#!/bin/bash 
+
+screen_width=`tput cols`
+write_bs() {
+				for i in `seq 100`; do
+					output=`seq $i`
+					echo -ne "\r"${output::$screen_width}
+					sleep 0.01
+				done
+}
+write_bs
+read -p "type: " a
+write_bs
+
